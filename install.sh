@@ -9,14 +9,21 @@ if ! command -v npm &> /dev/null; then
     sudo apt-get install -y nodejs
 fi
 
-# Create VS Code extensions directory
+# Create VS Code extensions directory (try both local and server)
 mkdir -p ~/.vscode/extensions
+mkdir -p ~/.vscode-server/extensions
 
 # Install HTCondor Status Extension
 echo "📦 Installing HTCondor Status Extension..."
 
-# Create extension directory
-EXT_DIR="$HOME/.vscode/extensions/htcondor-status"
+# Try server extensions first (for devcontainers)
+if [ -d "$HOME/.vscode-server" ]; then
+    EXT_DIR="$HOME/.vscode-server/extensions/htcondor-status"
+    echo "📡 Installing to VS Code server extensions directory"
+else
+    EXT_DIR="$HOME/.vscode/extensions/htcondor-status"
+    echo "💻 Installing to VS Code local extensions directory"
+fi
 mkdir -p "$EXT_DIR"
 
 # Copy extension files from dotfiles
