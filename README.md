@@ -33,12 +33,10 @@ Open VS Code and configure dotfiles integration:
 
 ```json
 {
-    "dotfiles.repository": "https://github.com/yourusername/dotfiles",
+    "dotfiles.repository": "https://github.com/fyodor-wolf-elucid/dotfiles",
     "dotfiles.installCommand": "install.sh"
 }
 ```
-
-Replace `yourusername` with your actual GitHub username.
 
 ### 2. That's it! 
 
@@ -54,7 +52,7 @@ If you need to install the extension manually in an existing devcontainer:
 
 ```bash
 # Clone dotfiles (if not already done)
-git clone https://github.com/yourusername/dotfiles.git ~/dotfiles
+git clone https://github.com/fyodor-wolf-elucid/dotfiles.git ~/dotfiles
 
 # Run installation script
 ~/dotfiles/install.sh
