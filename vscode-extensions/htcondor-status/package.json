@@ -1,0 +1,24 @@
+{
+    "name": "htcondor-status",
+    "displayName": "HTCondor GPU Status",
+    "description": "Shows HTCondor GPU status in status bar",
+    "version": "0.0.1",
+    "engines": { 
+        "vscode": "^1.60.0" 
+    },
+    "categories": ["Other"],
+    "activationEvents": ["*"],
+    "main": "./extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "htcondor.refresh",
+                "title": "Refresh HTCondor Status"
+            },
+            {
+                "command": "htcondor.restart",
+                "title": "Restart HTCondor Service"
+            }
+        ]
+    }
+}
