@@ -18,13 +18,13 @@ else
     echo "Node.js $REQUIRED_NODE_VERSION already installed."
 fi
 
-# Install @anthropic-ai/claude-code globally
-if ! npm list -g @anthropic-ai/claude-code >/dev/null 2>&1; then
-    echo "Installing @anthropic-ai/claude-code globally..."
-    npm install -g @anthropic-ai/claude-code
-else
-    echo "@anthropic-ai/claude-code is already installed globally."
-fi
+# # Install @anthropic-ai/claude-code globally
+# if ! npm list -g @anthropic-ai/claude-code >/dev/null 2>&1; then
+#     echo "Installing @anthropic-ai/claude-code globally..."
+#     npm install -g @anthropic-ai/claude-code
+# else
+#     echo "@anthropic-ai/claude-code is already installed globally."
+# fi
 
 # Create VS Code extensions directory (try both local and server)
 mkdir -p ~/.vscode/extensions
