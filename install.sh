@@ -181,5 +181,11 @@ EOF
     echo "✅ HTCondor extension files created"
 fi
 
+# Run Claude authentication setup if available
+if [ -f "/tmp/post-create-claude.sh" ]; then
+    echo "🔐 Running Claude authentication setup..."
+    bash /tmp/post-create-claude.sh
+fi
+
 echo "🎉 Dotfiles setup complete!"
 echo "📝 To activate extensions, reload VS Code window when it starts"
