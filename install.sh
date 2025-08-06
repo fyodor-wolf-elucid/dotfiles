@@ -2,11 +2,28 @@
 
 echo "🚀 Setting up dotfiles and VS Code extensions..."
 
-# Install Node.js and vsce if not available
-if ! command -v npm &> /dev/null; then
-    echo "Installing Node.js..."
-    curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+
+# Install Node.js 18.20.0 if not available or wrong version
+REQUIRED_NODE_VERSION="v18.20.0"
+NODE_INSTALLED_VERSION="$(node -v 2>/dev/null || echo none)"
+if [ "$NODE_INSTALLED_VERSION" != "$REQUIRED_NODE_VERSION" ]; then
+    echo "Installing Node.js 18.20.0..."
+    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
     sudo apt-get install -y nodejs
+    # Verify version
+    if [ "$(node -v)" != "$REQUIRED_NODE_VERSION" ]; then
+        echo "Warning: Node.js version is $(node -v), expected $REQUIRED_NODE_VERSION."
+    fi
+else
+    echo "Node.js $REQUIRED_NODE_VERSION already installed."
+fi
+
+# Install @anthropic-ai/claude-code globally
+if ! npm list -g @anthropic-ai/claude-code >/dev/null 2>&1; then
+    echo "Installing @anthropic-ai/claude-code globally..."
+    npm install -g @anthropic-ai/claude-code
+else
+    echo "@anthropic-ai/claude-code is already installed globally."
 fi
 
 # Create VS Code extensions directory (try both local and server)
