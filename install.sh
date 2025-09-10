@@ -1,29 +1,22 @@
 #!/bin/bash
 
+# Claude Code Authentication Setup for Devcontainers
+# To avoid logging in every time, mount the Claude auth directory in your devcontainer.json:
+# "mounts": [
+#   "source=${localEnv:HOME}/.config/claude,target=/home/vscode/.config/claude,type=bind"
+# ]
+# Or for non-vscode user: target=/home/[your-username]/.config/claude
+
 echo "🚀 Setting up dotfiles and VS Code extensions..."
 
 
-# Install Node.js 18.20.0 if not available or wrong version
-REQUIRED_NODE_VERSION="v18.20.0"
-NODE_INSTALLED_VERSION="$(node -v 2>/dev/null || echo none)"
-if [ "$NODE_INSTALLED_VERSION" != "$REQUIRED_NODE_VERSION" ]; then
-    echo "Installing Node.js 18.20.0..."
-    curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-    sudo apt-get install -y nodejs
-    # Verify version
-    if [ "$(node -v)" != "$REQUIRED_NODE_VERSION" ]; then
-        echo "Warning: Node.js version is $(node -v), expected $REQUIRED_NODE_VERSION."
-    fi
+# Install Claude Code using the official installer
+if ! command -v claude &> /dev/null; then
+    echo "Installing Claude Code..."
+    curl -fsSL https://claude.ai/install.sh | bash
+    echo "✅ Claude Code installed successfully"
 else
-    echo "Node.js $REQUIRED_NODE_VERSION already installed."
-fi
-
-# Install @anthropic-ai/claude-code globally
-if ! npm list -g @anthropic-ai/claude-code >/dev/null 2>&1; then
-    echo "Installing @anthropic-ai/claude-code globally..."
-    sudo npm install -g @anthropic-ai/claude-code
-else
-    echo "@anthropic-ai/claude-code is already installed globally."
+    echo "Claude Code already installed."
 fi
 
 # Create VS Code extensions directory (try both local and server)
